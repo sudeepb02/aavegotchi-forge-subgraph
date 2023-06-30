@@ -1,13 +1,13 @@
 {
-  "name": "forge-subgraph",
+  "name": "aavegotchi-forge-subgraph",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ sudeepb02/forge-subgraph",
-    "create-local": "graph create --node http://localhost:8020/ sudeepb02/forge-subgraph",
-    "remove-local": "graph remove --node http://localhost:8020/ sudeepb02/forge-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sudeepb02/forge-subgraph",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ sudeepb02/aavegotchi-forge-subgraph",
+    "create-local": "graph create --node http://localhost:8020/ sudeepb02/aavegotchi-forge-subgraph",
+    "remove-local": "graph remove --node http://localhost:8020/ sudeepb02/aavegotchi-forge-subgraph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sudeepb02/aavegotchi-forge-subgraph",
     "test": "graph test"
   },
   "dependencies": {

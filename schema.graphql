@@ -1,6 +1,128 @@
-type ExampleEntity @entity {
+type Account @entity {
+  id: Bytes!
+  totalItemsForged: BigInt!
+  totalItemsSmelted: BigInt!
+}
+
+type Gotchi @entity {
   id: ID!
-  count: BigInt!
-  owner: Bytes! # address
-  itemId: BigInt! # uint256
+  totalItemsForged: BigInt!
+  totalItemsSmelted: BigInt!
+  itemsSmelted: [ItemSmelted!] @derivedFrom(field: "gotchi")
+  itemsForged: [ItemForged!] @derivedFrom(field: "gotchi")
+  skillPoints: Int!
+  smithingLevel: Int!
+  levelMultiplier: Int!
+}
+
+type Item @entity {
+  " Item ID "
+  id: ID!
+
+  itemsSmelted: [ItemSmelted!] @derivedFrom(field: "item")
+
+  itemsForged: [ItemForged!] @derivedFrom(field: "item")
+
+  " Number of times this item has been smelted "
+  timesSmelted: BigInt!
+
+  " Number of times this item has been forged "
+  timesForged: BigInt!
+}
+
+type ForgeQueueItem @entity {
+  " Gotchi ID + Item ID + Forge Queue Item ID "
+  id: ID!
+
+  " Forge Queue Item ID "
+  queueId: BigInt!
+
+  item: Item!
+
+  gotchi: Gotchi!
+
+  readyBlock: BigInt!
+
+  isClaimed: Boolean!
+}
+
+type ItemSmelted @entity {
+  " Tx hash + logIndex "
+  id: ID!
+
+  timestamp: BigInt!
+
+  txHash: Bytes!
+
+  item: Item!
+
+  gotchi: Gotchi!
+}
+
+type ItemForged @entity {
+  " Tx hash + logIndex "
+  id: ID!
+
+  timestamp: BigInt!
+
+  txHash: Bytes!
+
+  item: Item!
+
+  gotchi: Gotchi!
+}
+
+type GeodePrize @entity {
+  " Geode Prize ID "
+  id: ID!
+
+  " Total quantity "
+  quantity: BigInt!
+
+  " Times won "
+  timesWon: BigInt!
+
+  " Times empty "
+  timesEmpty: BigInt!
+}
+
+type GeodeDraw @entity {
+  " Tx hash + logIndex "
+  id: ID!
+
+  user: Account!
+
+  itemWon: Item
+
+  geodeTokenId: BigInt!
+
+  requestId: Bytes!
+
+  blockNumber: BigInt!
+}
+
+type VrfRequestResponse @entity {
+  " Tx Hash + logIndex + Request ID "
+  id: ID!
+
+  requestId: Bytes!
+
+  user: Account!
+
+  randomNumber: BigInt!
+
+  blockNumber: BigInt!
+}
+
+type GeodeRefund @entity {
+  " Tx hash + logIndex "
+  id: ID!
+
+  user: Account!
+
+  geodeTokenId: BigInt!
+
+  requestId: Bytes!
+
+  blockNumber: BigInt!
 }

@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,9 +8,10 @@ dataSources:
     source:
       address: "0x4fDfc1B53Fd1D80d969C984ba7a8CE4c7bAaD442"
       abi: ForgeDiamond
+      startBlock: 39165012
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - AddedToQueue
@@ -41,4 +42,14 @@ dataSources:
           handler: handleTransferBatch
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
           handler: handleTransferSingle
+        - event: SetGeodePrizes(uint256[],uint256[])
+          handler: handleSetGeodePrizes
+        - event: VrfResponse(address,uint256,bytes32,uint256)
+          handler: handleVrfResponse
+        - event: GeodeWin(address,uint256,uint256,bytes32,uint256)
+          handler: handleGeodeWin
+        - event: GeodeEmpty(address,uint256,bytes32,uint256)
+          handler: handleGeodeEmpty
+        - event: GeodeRefunded(address,uint256,bytes32,uint256)
+          handler: handleGeodeRefunded
       file: ./src/forge-diamond.ts
